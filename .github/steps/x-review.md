@@ -16,8 +16,10 @@ The school's administration is thrilled with the results! The new system is not 
 ### What's next?
 
 - Check out the other [GitHub Skills exercises](https://learn.github.com/skills).
+  - Take [Customize your GitHub Copilot Experience](https://github.com/skills/customize-your-github-copilot-experience) exercise to learn about custom instructions, chat modes and prompt files _(like the runCobolApp you used in this exercise)_
   - Learn how to [Integrate MCP with Copilot](https://github.com/skills/integrate-mcp-with-copilot) to enable more context and tools for your Copilot experience.
   - Try GitHub Copilot Coding Agent in the [Expand your team with Copilot](https://github.com/skills/expand-your-team-with-copilot) exercise
+
 
 Check out these resources to learn more about GitHub Copilot :
 
