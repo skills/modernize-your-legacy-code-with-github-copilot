@@ -1,5 +1,7 @@
 ---
-mode: agent
+agent: 'agent'
+model: gpt-4.1
+description: 'Compile and run the Cobol accounting system'
 ---
 
 I want you to compile and run the COBOL application.
