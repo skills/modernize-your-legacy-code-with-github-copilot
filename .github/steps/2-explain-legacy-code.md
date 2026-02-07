@@ -65,7 +65,7 @@ Let's visualize the data flow with a diagram!
    > showing the data flow of the app.
    >
    > Please create this in mermaid format so that I can render this at
-   > the end of the the docs/README.md markdown file.
+   > the end of the docs/README.md markdown file.
    > ```
 
 1. Make sure you can preview the diagram in the `docs/README.md` file.
