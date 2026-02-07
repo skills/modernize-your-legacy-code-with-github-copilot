@@ -77,7 +77,7 @@ Take a moment to run the application and test suite yourself to ensure everythin
 
 1. Commit the changes to the `src/accounting` directory and push to the `modernize-legacy-code` branch.
 
-   >[!TIP]
+   > [!TIP]
    > You can use the source control side panel like you did in the previous steps!
 
 <details>
