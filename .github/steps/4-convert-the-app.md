@@ -26,7 +26,7 @@ Let's use GitHub Copilot to do the heavy lifting of converting our COBOL applica
     > - data integrity
     > - menu options of the original application.
     >
-    > Change directory to src/accounting and install all prerequisites 
+    > Change directory to src/accounting and install all prerequisites
     > to run the Node.js application
     >
     > Create a .vscode/launch.json file to run the Node.js application
