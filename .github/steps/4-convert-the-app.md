@@ -17,14 +17,17 @@ Let's use GitHub Copilot to do the heavy lifting of converting our COBOL applica
     > ![Static Badge](https://img.shields.io/badge/-Prompt-text?style=social&logo=github%20copilot)
     >
     > ```prompt
-    > #codebase convert the three separate COBOL legacy files into a single Node.js src/accounting/index.js accounting application.
+    > #codebase convert the three separate COBOL legacy files into a single
+    > Node.js src/accounting/index.js accounting application.
     >
-    > Leverage the data flow diagram of the existing COBOL application available in the repository to preserve:
+    > Leverage the data flow diagram of the existing COBOL application
+    > available in the repository to preserve:
     > - the original business logic
     > - data integrity
     > - menu options of the original application.
     >
-    > Change directory to src/accounting and install all prerequisites to run the Node.js application
+    > Change directory to src/accounting and install all prerequisites 
+    > to run the Node.js application
     >
     > Create a .vscode/launch.json file to run the Node.js application
     > ```
@@ -46,11 +49,13 @@ Since we already have a detailed test plan in `docs/TESTPLAN.md`, GitHub Copilot
     > ![Static Badge](https://img.shields.io/badge/-Prompt-text?style=social&logo=github%20copilot)
     >
     > ```prompt
-    > #codebase change directory to src/accounting and install all prerequisites for the test framework.
+    > #codebase change directory to src/accounting and install all
+    > prerequisites for the test framework.
     >
     > - Write unit tests for the Node.js application that mirror the scenarios in the testplan.
     > - Place the tests in a dedicated test file.
-    > - Make sure each test checks the expected behavior described in the COBOL test plan.
+    > - Make sure each test checks the expected behavior
+    >   described in the COBOL test plan.
     > ```
 
 1. Copilot Agent Mode should generate unit tests and make sure they run. With its self-healing capabilities, Copilot should automatically fix any issues that arise during the test generation process.
@@ -72,7 +77,8 @@ Take a moment to run the application and test suite yourself to ensure everythin
 
 1. Commit the changes to the `src/accounting` directory and push to the `modernize-legacy-code` branch.
 
-   > 💡 **Tip:** You can use the source control side panel like you did in the previous steps!
+   >[!TIP]
+   > You can use the source control side panel like you did in the previous steps!
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>

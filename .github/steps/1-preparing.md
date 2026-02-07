@@ -44,7 +44,6 @@ To get started, we will set up a GitHub Codespace with the necessary tools and e
    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/{{full_repo_name}}?quickstart=1)
 
 1. Confirm the **Repository** field is your copy of the exercise, not the original, then click the green **Create Codespace** button.
-
    - ✅ Your copy: `/{{full_repo_name}}`
    - ❌ Original: `/skills/modernize-your-legacy-code-with-github-copilot`
 
@@ -52,13 +51,13 @@ To get started, we will set up a GitHub Codespace with the necessary tools and e
 
 1. In the left sidebar, click the extensions tab and verify that the `GitHub Copilot` and `Cobol` extensions are installed and enabled.
 
-   <img width="350" alt="copilot extension for VS Code" src="https://github.com/user-attachments/assets/ef1ef984-17fc-4b20-a9a6-65a866def468" />
+   <img width="350" alt="copilot extension for VS Code" src="../images/copilot-extension-vscode.png" />
 
-   <img width="345" alt="cobol extension for VS Code" src="https://github.com/user-attachments/assets/955aad46-7468-4942-bbd3-d342bcef7642" />
+   <img width="345" alt="cobol extension for VS Code" src="../images/cobol-extension-vscode.png" />
 
 1. At the top of VS Code, locate and click the **Copilot icon** to open a Copilot Chat panel.
 
-   <img width="150" alt="image" src="https://github.com/user-attachments/assets/5e64db46-95cb-415d-badc-b6b8677f10c1" />
+   <img width="150" alt="image" src="../images/copilot-chat-icon.png" />
 
 1. If this is your first time using GitHub Copilot, you will need to accept the usage terms to continue.
 
@@ -83,7 +82,8 @@ Great work! Now that we have our working environment set up, let's ask copilot f
    > ![Static Badge](https://img.shields.io/badge/-Prompt-text?style=social&logo=github%20copilot)
    >
    > ```prompt
-   > Hey copilot, how can I create and publish a new git branch called modernize-legacy-code?
+   > Hey copilot, how can I create and publish a new git branch
+   > called modernize-legacy-code?
    > ```
 
    <details>
