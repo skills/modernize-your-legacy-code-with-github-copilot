@@ -23,7 +23,7 @@ Because that is a common task, we have already set up a custom prompt file that 
    <!--- TODO: add screenshot -->
    >[!NOTE]
    > You can find the contents of the prompt file in `.github/prompts` directory.
-   > You can learn more about prompt files [prompt-files](https://code.visualstudio.com/docs/copilot/customization/prompt-files).
+   > You can learn more in the [prompt files documentation](https://code.visualstudio.com/docs/copilot/customization/prompt-files).
 
 1. Play with the Cobol App to see how it works!
    - The application will prompt you to select an option from the menu.
