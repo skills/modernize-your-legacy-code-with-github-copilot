@@ -31,7 +31,8 @@ Let's use GitHub Copilot to help us understand the COBOL code!
    > and any specific business rules related to student accounts.
    > ```
 
-   > [!TIP] Creating good prompts is a combination of proper context, clarity and specificity. Learn more about [Prompt Engineering](https://docs.github.com/en/copilot/concepts/prompt-engineering-for-copilot-chat).
+   > [!TIP]
+   > Creating good prompts is a combination of proper context, clarity and specificity. Learn more about [Prompt Engineering](https://docs.github.com/en/copilot/concepts/prompt-engineering-for-copilot-chat).
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
