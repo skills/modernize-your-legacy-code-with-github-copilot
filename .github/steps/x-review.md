@@ -20,8 +20,7 @@ The school's administration is thrilled with the results! The new system is not 
   - Learn how to [Integrate MCP with Copilot](https://github.com/skills/integrate-mcp-with-copilot) to enable more context and tools for your Copilot experience.
   - Try GitHub Copilot Coding Agent in the [Expand your team with Copilot](https://github.com/skills/expand-your-team-with-copilot) exercise
 
-
-Check out these resources to learn more about GitHub Copilot :
+Check out these resources to learn more about GitHub Copilot:
 
 - Read the blog that this Skills exercise is based on: [Modernizing legacy code with GitHub Copilot: Tips and examples](https://github.blog/ai-and-ml/github-copilot/modernizing-legacy-code-with-github-copilot-tips-and-examples/)
 - Are you not getting the responses you want from Copilot? [Learn prompt engineering](https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/prompt-engineering-for-copilot-chat)
