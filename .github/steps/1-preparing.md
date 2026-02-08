@@ -15,7 +15,7 @@ Many educational institutions still rely on legacy COBOL systems for critical ad
 - ❗ Lack of Agility – Legacy systems are rigid, making it hard to adapt to new business needs or market changes quickly.
 - ❗ Security Risks – Outdated codebases may lack modern security features, leaving systems vulnerable.
 
-**Benefits of Modernizing Legacy Systems**
+#### Benefits of Modernizing Legacy Systems
 
 - ✅ Improved Agility – Easier to adapt and scale with changing business and technology needs.
 - ✅ Cost Efficiency – Modern systems are typically more efficient and require less manual intervention.

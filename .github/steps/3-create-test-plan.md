@@ -66,7 +66,8 @@ We will use that test plan to create tests in the Node.js application later.
 
 1. Commit the changes to the `docs/TESTPLAN.md` file and push to the `modernize-legacy-code` branch.
 
-   > 💡 **Tip:** You can use Copilot to help you with the commit message like in the last step, or write your own.
+   > [!TIP]
+   > You can use Copilot to help you with the commit message like in the last step, or write your own.
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
