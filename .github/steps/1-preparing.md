@@ -57,7 +57,7 @@ To get started, we will set up a GitHub Codespace with the necessary tools and e
 
 1. At the top of VS Code, locate and click the **Copilot icon** to open a Copilot Chat panel.
 
-   <img width="150" alt="image" src="../images/copilot-chat-icon.png" />
+   <img width="150" alt="Copilot chat icon in VS Code" src="../images/copilot-chat-icon.png" />
 
 1. If this is your first time using GitHub Copilot, you will need to accept the usage terms to continue.
 
