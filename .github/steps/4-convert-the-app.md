@@ -52,7 +52,7 @@ Since we already have a detailed test plan in `docs/TESTPLAN.md`, GitHub Copilot
     > #codebase change directory to src/accounting and install all
     > prerequisites for the test framework.
     >
-    > - Write unit tests for the Node.js application that mirror the scenarios in the testplan.
+    > - Write unit tests for the Node.js application that mirror the scenarios in the test plan documented in docs/TESTPLAN.md.
     > - Place the tests in a dedicated test file.
     > - Make sure each test checks the expected behavior
     >   described in the COBOL test plan.
