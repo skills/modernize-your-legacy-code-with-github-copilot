@@ -2,7 +2,7 @@
 
 Welcome to Mergington High School's IT team! You've joined at a critical time. The school has been using the same COBOL-based accounting system since the early 1990s to manage student fees, cafeteria accounts, and school supplies purchases. The original programmer retired years ago, and the current IT staff struggles to maintain the system whenever changes are needed. There is a desire to update the application to a more modern progamming languate and Node.js seems to fit this requirement.
 
-<img  width="60%" height="60%" src="../images/cobol-to-nodejs.png" alt="Cobol to Node.js"/>
+<img width="60%" height="60%" alt="Cobol to Node.js"/ src="https://github.com/user-attachments/assets/fd51f198-16c3-4cb9-9fbc-bc1a2587a4c4" />
 
 ### 📖 Theory: Educational Legacy Systems Modernization
 
@@ -53,13 +53,14 @@ To get started, we will set up a GitHub Codespace with the necessary tools and e
 
 1. In the left sidebar, click the extensions tab and verify that the `GitHub Copilot` and `Cobol` extensions are installed and enabled.
 
-   <img width="350" alt="copilot extension for VS Code" src="../images/copilot-extension-vscode.png" />
+   <img width="350" alt="copilot extension for VS Code" src="https://github.com/user-attachments/assets/d840806d-4d9d-4059-a198-c8dd8079f8de" />
 
-   <img width="345" alt="cobol extension for VS Code" src="../images/cobol-extension-vscode.png" />
+   <img width="345" alt="cobol extension for VS Code" src="https://github.com/user-attachments/assets/106a7164-c504-4f14-84d1-4439bd8a15e2" />
+
 
 1. At the top of VS Code, locate and click the **Copilot icon** to open a Copilot Chat panel.
 
-   <img width="150" alt="Copilot chat icon in VS Code" src="../images/copilot-chat-icon.png" />
+   <img width="150" alt="Copilot chat icon in VS Code" src="https://github.com/user-attachments/assets/128e3670-64a7-431a-945e-a57a7b23ba6b" />
 
 1. If this is your first time using GitHub Copilot, you will need to accept the usage terms to continue.
 
