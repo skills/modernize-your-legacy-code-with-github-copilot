@@ -57,7 +57,7 @@ We will use that test plan to create tests in the Node.js application later.
    > 7. Status (Pass/Fail)
    > 8. Comments
    >
-   > Please create the test plan in a markdown table format. 
+   > Please create the test plan in a markdown table format.
    > The test plan should cover all the business logic in the current Cobol app.
    >
    > ```
