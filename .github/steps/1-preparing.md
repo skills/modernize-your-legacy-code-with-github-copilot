@@ -2,7 +2,7 @@
 
 Welcome to Mergington High School's IT team! You've joined at a critical time. The school has been using the same COBOL-based accounting system since the early 1990s to manage student fees, cafeteria accounts, and school supplies purchases. The original programmer retired years ago, and the current IT staff struggles to maintain the system whenever changes are needed. There is a desire to update the application to a more modern progamming languate and Node.js seems to fit this requirement.
 
-<img  width="60%" height="60%" src="../images/cobol_to_nodejs.png" alt="Cobol to Node.js"/>
+<img  width="60%" height="60%" src="../images/cobol-to-nodejs.png" alt="Cobol to Node.js"/>
 
 ### 📖 Theory: Educational Legacy Systems Modernization
 
