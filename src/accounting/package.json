@@ -10,9 +10,7 @@
   "keywords": ["accounting", "nodejs"],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "prompt-sync": "^4.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "jest": "^29.5.0"
   }

@@ -7,6 +7,8 @@
  * - Debit (subtract) funds from account
  */
 
+const readline = require('readline');
+
 // Data storage module (equivalent to DataProgram in COBOL)
 const DataStore = {
   balance: 1000.00,
@@ -37,52 +39,66 @@ class AccountOperations {
     console.log(`Current balance: $${balance.toFixed(2)}`);
   }
   
-  static creditAccount() {
-    const promptFn = this.getPrompt();
-    const amountStr = promptFn('Enter credit amount: ');
-    const amount = parseFloat(amountStr);
-    
-    if (isNaN(amount) || amount < 0) {
-      console.log('Invalid amount entered.');
-      return;
-    }
-    
-    let balance = DataStore.read();
-    balance += amount;
-    DataStore.write(balance);
-    console.log(`Amount credited. New balance: $${balance.toFixed(2)}`);
+  static creditAccount(promptFn) {
+    return new Promise((resolve) => {
+      promptFn('Enter credit amount: ', (amountStr) => {
+        const amount = parseFloat(amountStr);
+        
+        if (isNaN(amount) || amount < 0) {
+          console.log('Invalid amount entered.');
+          resolve();
+          return;
+        }
+        
+        let balance = DataStore.read();
+        balance += amount;
+        DataStore.write(balance);
+        console.log(`Amount credited. New balance: $${balance.toFixed(2)}`);
+        resolve();
+      });
+    });
   }
   
-  static debitAccount() {
-    const promptFn = this.getPrompt();
-    const amountStr = promptFn('Enter debit amount: ');
-    const amount = parseFloat(amountStr);
-    
-    if (isNaN(amount) || amount < 0) {
-      console.log('Invalid amount entered.');
-      return;
-    }
-    
-    let balance = DataStore.read();
-    
-    if (balance >= amount) {
-      balance -= amount;
-      DataStore.write(balance);
-      console.log(`Amount debited. New balance: $${balance.toFixed(2)}`);
-    } else {
-      console.log('Insufficient funds for this debit.');
-    }
+  static debitAccount(promptFn) {
+    return new Promise((resolve) => {
+      promptFn('Enter debit amount: ', (amountStr) => {
+        const amount = parseFloat(amountStr);
+        
+        if (isNaN(amount) || amount < 0) {
+          console.log('Invalid amount entered.');
+          resolve();
+          return;
+        }
+        
+        let balance = DataStore.read();
+        
+        if (balance >= amount) {
+          balance -= amount;
+          DataStore.write(balance);
+          console.log(`Amount debited. New balance: $${balance.toFixed(2)}`);
+        } else {
+          console.log('Insufficient funds for this debit.');
+        }
+        resolve();
+      });
+    });
   }
 }
 
 // Main program (equivalent to MainProgram in COBOL)
-function main(promptInstance) {
-  if (promptInstance) {
-    AccountOperations.promptFunction = promptInstance;
+async function main(rl) {
+  const prompt = (question) => {
+    return new Promise((resolve) => {
+      rl.question(question, resolve);
+    });
+  };
+  
+  // Set up for testing purposes if needed
+  if (rl.question && !AccountOperations.promptFunction) {
+    // Use readline's question method
   }
   
   let continueProgram = true;
-  const promptFn = AccountOperations.getPrompt();
   
   while (continueProgram) {
     console.log('--------------------------------');
@@ -93,17 +109,17 @@ function main(promptInstance) {
     console.log('4. Exit');
     console.log('--------------------------------');
     
-    const choice = promptFn('Enter your choice (1-4): ');
+    const choice = await prompt('Enter your choice (1-4): ');
     
-    switch (choice) {
+    switch (choice.trim()) {
       case '1':
         AccountOperations.viewBalance();
         break;
       case '2':
-        AccountOperations.creditAccount();
+        await AccountOperations.creditAccount(prompt);
         break;
       case '3':
-        AccountOperations.debitAccount();
+        await AccountOperations.debitAccount(prompt);
         break;
       case '4':
         continueProgram = false;
@@ -121,6 +137,16 @@ module.exports = { DataStore, AccountOperations, main };
 
 // Run the application only if this is the main module being executed
 if (require.main === module) {
-  const prompt = require('prompt-sync')({history: false, sigint: true});
-  main(prompt);
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  
+  main(rl).then(() => {
+    rl.close();
+  }).catch((err) => {
+    console.error('Error:', err);
+    rl.close();
+    process.exit(1);
+  });
 }

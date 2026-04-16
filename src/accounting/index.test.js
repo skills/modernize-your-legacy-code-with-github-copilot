@@ -16,14 +16,12 @@ describe('Accounting System Tests', () => {
     DataStore.balance = 1000.00;
     // Create mock prompt function
     mockPrompt = jest.fn();
-    AccountOperations.promptFunction = mockPrompt;
     // Suppress console output during tests for cleaner output
     consoleSpy = jest.spyOn(console, 'log').mockImplementation();
   });
   
   afterEach(() => {
     consoleSpy.mockRestore();
-    AccountOperations.promptFunction = null;
   });
   
   describe('DataStore - Core Storage', () => {
@@ -56,32 +54,32 @@ describe('Accounting System Tests', () => {
   
   describe('Account Operations - Credit (TC_003, TC_004, TC_005)', () => {
     
-    test('TC_003: should increase balance when crediting valid amount', () => {
-      mockPrompt.mockReturnValueOnce('50');
-      AccountOperations.creditAccount();
+    test('TC_003: should increase balance when crediting valid amount', async () => {
+      const mockPromptFn = (question, callback) => callback('50');
+      await AccountOperations.creditAccount(mockPromptFn);
       
       expect(DataStore.read()).toBe(1050.00);
       expect(consoleSpy).toHaveBeenCalledWith('Amount credited. New balance: $1050.00');
     });
     
-    test('TC_004: should handle large credit amounts', () => {
-      mockPrompt.mockReturnValueOnce('999999.99');
-      AccountOperations.creditAccount();
+    test('TC_004: should handle large credit amounts', async () => {
+      const mockPromptFn = (question, callback) => callback('999999.99');
+      await AccountOperations.creditAccount(mockPromptFn);
       
       expect(DataStore.read()).toBeCloseTo(1000999.99, 2);
     });
     
-    test('TC_005: should credit with decimal precision', () => {
-      mockPrompt.mockReturnValueOnce('25.75');
-      AccountOperations.creditAccount();
+    test('TC_005: should credit with decimal precision', async () => {
+      const mockPromptFn = (question, callback) => callback('25.75');
+      await AccountOperations.creditAccount(mockPromptFn);
       
       expect(DataStore.read()).toBeCloseTo(1025.75, 2);
       expect(consoleSpy).toHaveBeenCalledWith('Amount credited. New balance: $1025.75');
     });
     
-    test('should handle invalid credit amount', () => {
-      mockPrompt.mockReturnValueOnce('invalid');
-      AccountOperations.creditAccount();
+    test('should handle invalid credit amount', async () => {
+      const mockPromptFn = (question, callback) => callback('invalid');
+      await AccountOperations.creditAccount(mockPromptFn);
       
       expect(consoleSpy).toHaveBeenCalledWith('Invalid amount entered.');
       expect(DataStore.read()).toBe(1000.00); // Balance unchanged
@@ -90,60 +88,60 @@ describe('Accounting System Tests', () => {
   
   describe('Account Operations - Debit (TC_006, TC_007, TC_008, TC_009, TC_010)', () => {
     
-    test('TC_006: should decrease balance when debiting valid amount', () => {
-      mockPrompt.mockReturnValueOnce('75');
-      AccountOperations.debitAccount();
+    test('TC_006: should decrease balance when debiting valid amount', async () => {
+      const mockPromptFn = (question, callback) => callback('75');
+      await AccountOperations.debitAccount(mockPromptFn);
       
       expect(DataStore.read()).toBe(925.00);
       expect(consoleSpy).toHaveBeenCalledWith('Amount debited. New balance: $925.00');
     });
     
-    test('TC_007: should allow debit of exact balance', () => {
+    test('TC_007: should allow debit of exact balance', async () => {
       DataStore.write(975.00);
-      mockPrompt.mockReturnValueOnce('975');
-      AccountOperations.debitAccount();
+      const mockPromptFn = (question, callback) => callback('975');
+      await AccountOperations.debitAccount(mockPromptFn);
       
       expect(DataStore.read()).toBe(0.00);
       expect(consoleSpy).toHaveBeenCalledWith('Amount debited. New balance: $0.00');
     });
     
-    test('TC_008 (CRITICAL): should prevent debit with insufficient funds', () => {
-      mockPrompt.mockReturnValueOnce('2000');
-      AccountOperations.debitAccount();
+    test('TC_008 (CRITICAL): should prevent debit with insufficient funds', async () => {
+      const mockPromptFn = (question, callback) => callback('2000');
+      await AccountOperations.debitAccount(mockPromptFn);
       
       expect(DataStore.read()).toBe(1000.00); // Balance unchanged
       expect(consoleSpy).toHaveBeenCalledWith('Insufficient funds for this debit.');
     });
     
-    test('TC_009: should reject debit exceeding balance by $0.01', () => {
+    test('TC_009: should reject debit exceeding balance by $0.01', async () => {
       DataStore.write(100.00);
-      mockPrompt.mockReturnValueOnce('100.01');
-      AccountOperations.debitAccount();
+      const mockPromptFn = (question, callback) => callback('100.01');
+      await AccountOperations.debitAccount(mockPromptFn);
       
       expect(DataStore.read()).toBe(100.00);
       expect(consoleSpy).toHaveBeenCalledWith('Insufficient funds for this debit.');
     });
     
-    test('TC_010: should maintain decimal precision in debit operations', () => {
+    test('TC_010: should maintain decimal precision in debit operations', async () => {
       DataStore.write(500.50);
-      mockPrompt.mockReturnValueOnce('123.45');
-      AccountOperations.debitAccount();
+      const mockPromptFn = (question, callback) => callback('123.45');
+      await AccountOperations.debitAccount(mockPromptFn);
       
       expect(DataStore.read()).toBeCloseTo(377.05, 2);
       expect(consoleSpy).toHaveBeenCalledWith('Amount debited. New balance: $377.05');
     });
     
-    test('should handle invalid debit amount', () => {
-      mockPrompt.mockReturnValueOnce('invalid');
-      AccountOperations.debitAccount();
+    test('should handle invalid debit amount', async () => {
+      const mockPromptFn = (question, callback) => callback('invalid');
+      await AccountOperations.debitAccount(mockPromptFn);
       
       expect(consoleSpy).toHaveBeenCalledWith('Invalid amount entered.');
       expect(DataStore.read()).toBe(1000.00); // Balance unchanged
     });
     
-    test('should handle negative debit amount', () => {
-      mockPrompt.mockReturnValueOnce('-100');
-      AccountOperations.debitAccount();
+    test('should handle negative debit amount', async () => {
+      const mockPromptFn = (question, callback) => callback('-100');
+      await AccountOperations.debitAccount(mockPromptFn);
       
       expect(consoleSpy).toHaveBeenCalledWith('Invalid amount entered.');
       expect(DataStore.read()).toBe(1000.00); // Balance unchanged
@@ -152,59 +150,60 @@ describe('Accounting System Tests', () => {
   
   describe('Business Logic Scenarios (TC_011)', () => {
     
-    test('TC_011: sequential operations - credit and debit maintain data persistence', () => {
+    test('TC_011: sequential operations - credit and debit maintain data persistence', async () => {
       DataStore.write(1000.00);
       
-      mockPrompt.mockReturnValueOnce('200');
-      AccountOperations.creditAccount();
+      const mockPromptFn1 = (question, callback) => callback('200');
+      await AccountOperations.creditAccount(mockPromptFn1);
       expect(DataStore.read()).toBe(1200.00);
       
-      mockPrompt.mockReturnValueOnce('50');
-      AccountOperations.debitAccount();
+      const mockPromptFn2 = (question, callback) => callback('50');
+      await AccountOperations.debitAccount(mockPromptFn2);
       expect(DataStore.read()).toBe(1150.00);
     });
     
-    test('should handle multiple credits', () => {
+    test('should handle multiple credits', async () => {
       DataStore.write(1000.00);
-      mockPrompt.mockReturnValueOnce('100');
-      AccountOperations.creditAccount();
+      
+      const mockPromptFn1 = (question, callback) => callback('100');
+      await AccountOperations.creditAccount(mockPromptFn1);
       expect(DataStore.read()).toBe(1100.00);
       
-      mockPrompt.mockReturnValueOnce('50');
-      AccountOperations.creditAccount();
+      const mockPromptFn2 = (question, callback) => callback('50');
+      await AccountOperations.creditAccount(mockPromptFn2);
       expect(DataStore.read()).toBe(1150.00);
     });
   });
   
   describe('Critical Business Rules Validation', () => {
     
-    test('Rule 1: Overdraft Protection must be enforced', () => {
+    test('Rule 1: Overdraft Protection must be enforced', async () => {
       DataStore.write(500.00);
-      mockPrompt.mockReturnValueOnce('600');
-      AccountOperations.debitAccount();
+      const mockPromptFn = (question, callback) => callback('600');
+      await AccountOperations.debitAccount(mockPromptFn);
       
       expect(DataStore.read()).toBe(500.00);
       expect(consoleSpy).toHaveBeenCalledWith('Insufficient funds for this debit.');
     });
     
-    test('Rule 2: Decimal precision must be maintained', () => {
-      mockPrompt.mockReturnValueOnce('123.45');
-      AccountOperations.creditAccount();
+    test('Rule 2: Decimal precision must be maintained', async () => {
+      const mockPromptFn = (question, callback) => callback('123.45');
+      await AccountOperations.creditAccount(mockPromptFn);
       const balance = DataStore.read();
       
       expect(balance).toBeCloseTo(1123.45, 2);
       expect(balance.toString()).toMatch(/\.\d{2}$/);
     });
     
-    test('Rule 3: Data consistency across operations', () => {
+    test('Rule 3: Data consistency across operations', async () => {
       DataStore.write(1000.00);
       
-      mockPrompt.mockReturnValueOnce('50');
-      AccountOperations.creditAccount();
+      const mockPromptFn1 = (question, callback) => callback('50');
+      await AccountOperations.creditAccount(mockPromptFn1);
       const balanceAfterCredit = DataStore.read();
       
-      mockPrompt.mockReturnValueOnce('75');
-      AccountOperations.debitAccount();
+      const mockPromptFn2 = (question, callback) => callback('75');
+      await AccountOperations.debitAccount(mockPromptFn2);
       const finalBalance = DataStore.read();
       
       expect(finalBalance).toBeCloseTo(balanceAfterCredit - 75, 2);
