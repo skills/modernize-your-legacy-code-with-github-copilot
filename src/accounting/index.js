@@ -24,83 +24,48 @@ const DataStore = {
 
 // Operations module (equivalent to Operations in COBOL)
 class AccountOperations {
-  static promptFunction = null; // Injected for testing
-  
-  static getPrompt() {
-    if (this.promptFunction) {
-      return this.promptFunction;
-    }
-    // Default: use global prompt if available
-    return typeof global.prompt !== 'undefined' ? global.prompt : null;
-  }
-  
   static viewBalance() {
     const balance = DataStore.read();
     console.log(`Current balance: $${balance.toFixed(2)}`);
   }
   
-  static creditAccount(promptFn) {
-    return new Promise((resolve) => {
-      promptFn('Enter credit amount: ', (amountStr) => {
-        const amount = parseFloat(amountStr);
-        
-        if (isNaN(amount) || amount < 0) {
-          console.log('Invalid amount entered.');
-          resolve();
-          return;
-        }
-        
-        let balance = DataStore.read();
-        balance += amount;
-        DataStore.write(balance);
-        console.log(`Amount credited. New balance: $${balance.toFixed(2)}`);
-        resolve();
-      });
-    });
+  static creditAccount(amountStr) {
+    const amount = parseFloat(amountStr);
+    
+    if (isNaN(amount) || amount < 0) {
+      console.log('Invalid amount entered.');
+      return;
+    }
+    
+    let balance = DataStore.read();
+    balance += amount;
+    DataStore.write(balance);
+    console.log(`Amount credited. New balance: $${balance.toFixed(2)}`);
   }
   
-  static debitAccount(promptFn) {
-    return new Promise((resolve) => {
-      promptFn('Enter debit amount: ', (amountStr) => {
-        const amount = parseFloat(amountStr);
-        
-        if (isNaN(amount) || amount < 0) {
-          console.log('Invalid amount entered.');
-          resolve();
-          return;
-        }
-        
-        let balance = DataStore.read();
-        
-        if (balance >= amount) {
-          balance -= amount;
-          DataStore.write(balance);
-          console.log(`Amount debited. New balance: $${balance.toFixed(2)}`);
-        } else {
-          console.log('Insufficient funds for this debit.');
-        }
-        resolve();
-      });
-    });
+  static debitAccount(amountStr) {
+    const amount = parseFloat(amountStr);
+    
+    if (isNaN(amount) || amount < 0) {
+      console.log('Invalid amount entered.');
+      return;
+    }
+    
+    let balance = DataStore.read();
+    
+    if (balance >= amount) {
+      balance -= amount;
+      DataStore.write(balance);
+      console.log(`Amount debited. New balance: $${balance.toFixed(2)}`);
+    } else {
+      console.log('Insufficient funds for this debit.');
+    }
   }
 }
 
 // Main program (equivalent to MainProgram in COBOL)
-async function main(rl) {
-  const prompt = (question) => {
-    return new Promise((resolve) => {
-      rl.question(question, resolve);
-    });
-  };
-  
-  // Set up for testing purposes if needed
-  if (rl.question && !AccountOperations.promptFunction) {
-    // Use readline's question method
-  }
-  
-  let continueProgram = true;
-  
-  while (continueProgram) {
+function main(rl) {
+  const displayMenu = () => {
     console.log('--------------------------------');
     console.log('Account Management System');
     console.log('1. View Balance');
@@ -108,28 +73,42 @@ async function main(rl) {
     console.log('3. Debit Account');
     console.log('4. Exit');
     console.log('--------------------------------');
-    
-    const choice = await prompt('Enter your choice (1-4): ');
-    
+  };
+  
+  const processChoice = (choice) => {
     switch (choice.trim()) {
       case '1':
         AccountOperations.viewBalance();
+        displayMenu();
+        rl.question('Enter your choice (1-4): ', processChoice);
         break;
       case '2':
-        await AccountOperations.creditAccount(prompt);
+        rl.question('Enter credit amount: ', (amount) => {
+          AccountOperations.creditAccount(amount);
+          displayMenu();
+          rl.question('Enter your choice (1-4): ', processChoice);
+        });
         break;
       case '3':
-        await AccountOperations.debitAccount(prompt);
+        rl.question('Enter debit amount: ', (amount) => {
+          AccountOperations.debitAccount(amount);
+          displayMenu();
+          rl.question('Enter your choice (1-4): ', processChoice);
+        });
         break;
       case '4':
-        continueProgram = false;
+        console.log('Exiting the program. Goodbye!');
+        rl.close();
         break;
       default:
         console.log('Invalid choice, please select 1-4.');
+        displayMenu();
+        rl.question('Enter your choice (1-4): ', processChoice);
     }
-  }
+  };
   
-  console.log('Exiting the program. Goodbye!');
+  displayMenu();
+  rl.question('Enter your choice (1-4): ', processChoice);
 }
 
 // Export for testing purposes
@@ -142,11 +121,5 @@ if (require.main === module) {
     output: process.stdout
   });
   
-  main(rl).then(() => {
-    rl.close();
-  }).catch((err) => {
-    console.error('Error:', err);
-    rl.close();
-    process.exit(1);
-  });
+  main(rl);
 }
