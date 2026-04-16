@@ -1,0 +1,19 @@
+{
+  "name": "accounting-system",
+  "version": "1.0.0",
+  "description": "Modernized Node.js accounting system converted from COBOL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "keywords": ["accounting", "nodejs"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
